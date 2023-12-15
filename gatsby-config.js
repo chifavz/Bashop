@@ -1,6 +1,9 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
   siteMetadata: {
@@ -25,7 +28,20 @@ module.exports = {
         path: `${__dirname}/src/images`,
       }
     },
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: ["Price"],
+        secretKey: process.env.STRIPE_SECRET_KEY,
+        downloadFiles: true,
+      },
+    },
+    
+  
+
     "gatsby-plugin-mdx",
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
   ],
 
 
